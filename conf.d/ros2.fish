@@ -146,6 +146,8 @@ end
 
 
 __ros2_fish_alias_add rtl 'ros2 topic list --show-types | ~/.config/fish/functions/__as-tree.py --color'
+__ros2_fish_alias_add rte 'ros2 topic echo'
+__ros2_fish_alias_add rtz 'ros2 topic hz'
 __ros2_fish_alias_add rnl 'ros2 node list | ~/.config/fish/functions/__as-tree.py --color'
 __ros2_fish_alias_add rsl 'ros2 service list'
 __ros2_fish_alias_add rpl 'ros2 pkg list'
@@ -213,17 +215,20 @@ __ros2_fish_abbr_add rbi --set-cursor --function abbr_ros2_bag_info
 __ros2_fish_abbr_add rbp --set-cursor --function abbr_ros2_bag_play
 __ros2_fish_abbr_add rbr ros2 bag record
 
+
+
+
+# Check if rosdep is installed
+if not command --query rosdep
+    exit 0
+    #__ros2_fish_echo "rosdep not installed."
+end
+
 # rosdep
 __ros2_fish_abbr_add rd rosdep
 __ros2_fish_abbr_add rdi rosdep init
 __ros2_fish_abbr_add rdu rosdep update
 __ros2_fish_abbr_add rdc rosdep check
-
-
-# Check if rosdep is installed
-if not command --query rosdep
-    __ros2_fish_echo "rosdep not installed."
-end
 
 
 # FIX: this runs on false positives
